@@ -58,23 +58,23 @@ describe('AppComponent', () => {
 
   it('should use lower case letters when lower case is enabled', () => {
     let result: string;
-    app.criteriaForm.controls.lowerUssage.setValue(true);
+    app.criteriaForm.controls.lowerUsage.setValue(true);
     app.getNewPassword();
     result = app.output;
     expect(result).toMatch(/^[a-z]{5}$/);
-    app.criteriaForm.controls.lowerUssage.setValue(false);
+    app.criteriaForm.controls.lowerUsage.setValue(false);
   });
 
   it('should use upper case letters when upper case is enabled', () => {
-    app.criteriaForm.controls.lowerUssage.setValue(false);
-    app.criteriaForm.controls.upperUssage.setValue(true);
+    app.criteriaForm.controls.lowerUsage.setValue(false);
+    app.criteriaForm.controls.upperUsage.setValue(true);
     app.getNewPassword();
     const result = app.output;
     expect(result).toMatch(/^[A-Z]{5}$/);
   });
 
   it('should use numbers when numbers are enabled', () => {
-    app.criteriaForm.controls.lowerUssage.setValue(false);
+    app.criteriaForm.controls.lowerUsage.setValue(false);
     app.criteriaForm.controls.numberUssage.setValue(true);
     app.getNewPassword();
     const result = app.output;
@@ -82,8 +82,8 @@ describe('AppComponent', () => {
   });
 
   it('should use the provided special characters when the special toggle is enabled', () => {
-    app.criteriaForm.controls.lowerUssage.setValue(false);
-    app.criteriaForm.controls.specialUssage.setValue(true);
+    app.criteriaForm.controls.lowerUsage.setValue(false);
+    app.criteriaForm.controls.specialUsage.setValue(true);
     app.criteriaForm.controls.specialCharacters.setValue('!-_');
     app.getNewPassword();
     const result = app.output;
