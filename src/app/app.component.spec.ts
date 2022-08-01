@@ -36,7 +36,6 @@ describe('AppComponent', () => {
   }));
 
   it('should create the app', () => {
-
     expect(app).toBeTruthy();
   });
 
@@ -51,7 +50,7 @@ describe('AppComponent', () => {
   it('should generate a password with the correct length', () => {
     const testLength = 3;
 
-    app.lengthControl = testLength;
+    app.criteriaForm.controls.length.setValue(testLength);
     app.getNewPassword();
 
     expect(app.output.length).toEqual(testLength);
@@ -59,35 +58,33 @@ describe('AppComponent', () => {
 
   it('should use lower case letters when lower case is enabled', () => {
     let result: string;
-    app.lowerToggleControl = true;
+    app.criteriaForm.controls.lowerUssage.setValue(true);
     app.getNewPassword();
     result = app.output;
     expect(result).toMatch(/^[a-z]{5}$/);
-    app.lowerToggleControl = false;
+    app.criteriaForm.controls.lowerUssage.setValue(false);
   });
 
   it('should use upper case letters when upper case is enabled', () => {
-    app.lowerToggleControl = false;
-    app.upperToggleControl = true;
+    app.criteriaForm.controls.lowerUssage.setValue(false);
+    app.criteriaForm.controls.upperUssage.setValue(true);
     app.getNewPassword();
     const result = app.output;
     expect(result).toMatch(/^[A-Z]{5}$/);
-    app.upperToggleControl = false;
   });
 
   it('should use numbers when numbers are enabled', () => {
-    app.lowerToggleControl = false;
-    app.numberToggleControl = true;
+    app.criteriaForm.controls.lowerUssage.setValue(false);
+    app.criteriaForm.controls.numberUssage.setValue(true);
     app.getNewPassword();
     const result = app.output;
     expect(result).toMatch(/^[0-9]{5}$/);
-    app.numberToggleControl = false;
   });
 
   it('should use the provided special characters when the special toggle is enabled', () => {
-    app.lowerToggleControl = false;
-    app.specialToggleControl = true;
-    app.specialCharactersControl = '!-_';
+    app.criteriaForm.controls.lowerUssage.setValue(false);
+    app.criteriaForm.controls.specialUssage.setValue(true);
+    app.criteriaForm.controls.specialCharacters.setValue('!-_');
     app.getNewPassword();
     const result = app.output;
     expect(result).toMatch(/^[!-_]{5}$/);
