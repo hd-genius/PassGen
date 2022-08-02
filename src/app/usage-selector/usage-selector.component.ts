@@ -9,7 +9,7 @@ import { TranslateService } from '@ngx-translate/core';
   templateUrl: './usage-selector.component.html',
   styleUrls: ['./usage-selector.component.scss'],
   providers: [
-    { 
+    {
       provide: NG_VALUE_ACCESSOR,
       multi: true,
       useExisting: forwardRef(() => UsageSelectorComponent),
@@ -27,7 +27,7 @@ export class UsageSelectorComponent implements ControlValueAccessor {
 
   constructor() {}
 
-  writeValue(value):void {
+  writeValue(value): void {
     this.selectedValue = value;
   }
 
@@ -41,8 +41,12 @@ export class UsageSelectorComponent implements ControlValueAccessor {
 
   updateSelectedValue(value): void {
     this.selectedValue = value;
-    this.onChange && this.onChange(value);
-    this.onTouched && this.onTouched();
+    if (this.onChange) {
+      this.onChange(value);
+    }
+    if (this.onTouched) {
+      this.onTouched();
+    }
   }
 
 }

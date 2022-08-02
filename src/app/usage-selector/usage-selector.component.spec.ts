@@ -27,7 +27,7 @@ describe('UsageSelectorComponent', () => {
       const newValue = CriteriaUsageState.CAN_USE;
       component.writeValue(newValue);
       expect(component.selectedValue).toEqual(newValue);
-    })
+    });
   });
 
   describe('updateSelectedValue', () => {
@@ -42,7 +42,7 @@ describe('UsageSelectorComponent', () => {
       const newSelectedValue = CriteriaUsageState.MUST_INCLUDE;
       component.registerOnChange(onChangeCallback);
       component.updateSelectedValue(newSelectedValue);
-      expect(onChangeCallback).toHaveBeenCalledWith(newSelectedValue)
+      expect(onChangeCallback).toHaveBeenCalledWith(newSelectedValue);
     });
 
     it('should call the registered onTouched callback if there is one', () => {
