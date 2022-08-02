@@ -19,7 +19,7 @@ export class AppComponent {
 
   readonly outputPlaceholder: string = 'Generate Password';
   readonly defaultSpecialCharacters = '-_@!$?';
-  
+
   public output: string = this.outputPlaceholder;
 
   criteriaForm = new FormGroup({
@@ -30,11 +30,11 @@ export class AppComponent {
     specialUsage: new FormControl(CriteriaUsageState.DO_NOT_USE),
     specialCharacters: new FormControl(null),
   },
-  [
-    CriteriaValidators.criteriaTypeValidator,
-    CriteriaValidators.criteriaLengthValidator
-  ]);
-  
+    [
+      CriteriaValidators.criteriaTypeValidator,
+      CriteriaValidators.criteriaLengthValidator
+    ]);
+
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
@@ -78,9 +78,9 @@ export class AppComponent {
       Array.from(specialCharacters)));
 
 
-    const newPassword = firstPasswordThatMeetsCriteria(this.generatePossiblePasswords());
+    const generatedPassword = firstPasswordThatMeetsCriteria(this.generatePossiblePasswords());
 
-    this.output  = newPassword;
+    this.output = generatedPassword;
   }
 
   public async copyPassword(): Promise<void> {
@@ -104,14 +104,14 @@ export class AppComponent {
     const lengthOfPassword = this.criteriaForm.get('length').value;
     const validCharacters: string[] = this.determineValidCharacters();
     const takeLengthOfPassword = take(lengthOfPassword);
-    const mapNumberToAnAvailableCharacter = map((randomIndex) =>validCharacters[randomIndex %validCharacters.length]);
+    const mapNumberToAnAvailableCharacter = map((randomIndex) => validCharacters[randomIndex % validCharacters.length]);
     const concatCharacters = reduce((x, y) => x + y)('');
 
     const getPasswordFromNumbers = combineOperators(
       takeLengthOfPassword,
       mapNumberToAnAvailableCharacter
     );
-    
+
     return concatCharacters(getPasswordFromNumbers(generateRandomNumbers()));
   }
 
@@ -122,35 +122,38 @@ export class AppComponent {
     const specialState = this.criteriaForm.get('specialUsage').value;
     const specialCharacters = this.criteriaForm.get('specialCharacters').value || this.defaultSpecialCharacters;
 
-      let validChars: string[] = [];
+    let validChars: string[] = [];
 
-      if (isUsable(lowerState))
-        validChars = validChars.concat(lowerCaseCharacters);
-  
-      if (isUsable(upperState))
-        validChars = validChars.concat(upperCaseCharacters);
-  
-      if (isUsable(numberState))
-        validChars = validChars.concat(numberCharacters);
-  
-      if (isUsable(specialState)) {
-        const enabledSpecialCharacters = specialCharacters || this.defaultSpecialCharacters;
-        const specialCharactersToAdd: string[] = Array.from(distinct([...enabledSpecialCharacters]));
-        validChars = validChars.concat(specialCharactersToAdd);
-      }
-  
-      return validChars;
+    if (isUsable(lowerState)) {
+      validChars = validChars.concat(lowerCaseCharacters);
+    }
+
+    if (isUsable(upperState)) {
+      validChars = validChars.concat(upperCaseCharacters);
+    }
+
+    if (isUsable(numberState)) {
+      validChars = validChars.concat(numberCharacters);
+    }
+
+    if (isUsable(specialState)) {
+      const enabledSpecialCharacters = specialCharacters || this.defaultSpecialCharacters;
+      const specialCharactersToAdd: string[] = Array.from(distinct([...enabledSpecialCharacters]));
+      validChars = validChars.concat(specialCharactersToAdd);
+    }
+
+    return validChars;
   }
 
 }
 
 const NUMBER_BUFFER_SIZE = 16;
 
-function* generateRandomNumbers () {
+function* generateRandomNumbers() {
   while (true) {
     const fetchedNumbers = new Uint8Array(NUMBER_BUFFER_SIZE);
     crypto.getRandomValues(fetchedNumbers);
-    for (let value of fetchedNumbers) {
+    for (const value of fetchedNumbers) {
       yield value;
     }
   }
