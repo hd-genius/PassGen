@@ -7,14 +7,16 @@ describe('Pass Gen', () => {
     page = new AppPage();
   });
 
-  it('should display a placeholder for generated passwords', () => {
+  it('should display a placeholder for generated passwords', async () => {
     page.navigateTo();
-    expect(page.getGeneratedPassword()).toContain('Generate Password');
+    const password = await page.getGeneratedPassword();
+    expect(password).toContain('Generate Password');
   });
 
   it('should generate a new password when the "Generate" button is pressed', async () => {
     const previousPassword = await page.getGeneratedPassword();
     await page.getGenerateButton().click();
-    expect(page.getGeneratedPassword()).not.toEqual(previousPassword);
+    const newPassword = await page.getGeneratedPassword();
+    expect(newPassword).not.toEqual(previousPassword);
   });
 });
