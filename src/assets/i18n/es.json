@@ -1,10 +1,10 @@
 {
-    "Generate Password": "Crear Contraseña",
-    "Length": "Longitud",
-    "Lower Case": "Minúsculas",
-    "Upper Case": "Mayúsculas",
-    "Numbers": "Números",
-    "Can use": "Puede Usar",
-    "Do not use": "No utilice",
-    "Must include": "Debe incluir"
+  "Generate Password": "Crear Contraseña",
+  "Length": "Longitud",
+  "Lower Case": "Minúsculas",
+  "Upper Case": "Mayúsculas",
+  "Numbers": "Números",
+  "Can use": "Puede Usar",
+  "Do not use": "No utilice",
+  "Must include": "Debe incluir"
 }

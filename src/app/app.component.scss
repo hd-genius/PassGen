@@ -1,24 +1,24 @@
 ion-header {
-    text-align: center;
+  text-align: center;
 }
 
 ion-button {
-    height: 2.5em;
-    margin: 0.2em 1em;
+  height: 2.5em;
+  margin: 0.2em 1em;
 }
 
 #generated-password {
-    font-family: 'Courier Prime Code';
-    text-align: center;
-    font-size: 2em;
-    padding: 0.5em 0;
+  font-family: "Courier Prime Code";
+  text-align: center;
+  font-size: 2em;
+  padding: 0.5em 0;
 }
 
 .criteria-error-message {
-    padding: 0 1em;
+  padding: 0 1em;
 }
 
 @font-face {
-    font-family: 'Courier Prime Code';
-    src: url('../assets/fonts/Courier-Prime-Code.ttf') format('truetype');
+  font-family: "Courier Prime Code";
+  src: url("../assets/fonts/Courier-Prime-Code.ttf") format("truetype");
 }

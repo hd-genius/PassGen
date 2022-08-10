@@ -1,24 +1,23 @@
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { UsageSelectorComponent } from './usage-selector.component';
-import { CriteriaUsageState } from '../criteria-usage-state.enum';
+import { UsageSelectorComponent } from "./usage-selector.component";
+import { CriteriaUsageState } from "../criteria-usage-state.enum";
 
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe } from "@ngx-translate/core";
 
-import 'jest';
+import "jest";
 
-jest.mock('@ngx-translate/core');
+jest.mock("@ngx-translate/core");
 
-describe('UsageSelectorComponent', () => {
+describe("UsageSelectorComponent", () => {
   let component: UsageSelectorComponent;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ UsageSelectorComponent, TranslatePipe ],
+      declarations: [UsageSelectorComponent, TranslatePipe],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    })
-    .compileComponents();
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -27,22 +26,22 @@ describe('UsageSelectorComponent', () => {
     fixture.detectChanges();
   });
 
-  describe('writeValue', () => {
-    it('should set selectedValue to the provided value', () => {
+  describe("writeValue", () => {
+    it("should set selectedValue to the provided value", () => {
       const newValue = CriteriaUsageState.CAN_USE;
       component.writeValue(newValue);
       expect(component.selectedValue).toEqual(newValue);
     });
   });
 
-  describe('updateSelectedValue', () => {
-    it('should set selectedValue to the new value', () => {
+  describe("updateSelectedValue", () => {
+    it("should set selectedValue to the new value", () => {
       const newSelectedValue = CriteriaUsageState.DO_NOT_USE;
       component.updateSelectedValue(newSelectedValue);
       expect(component.selectedValue).toEqual(newSelectedValue);
     });
 
-    it('should call the registered onChange callback with the new value, if there is one', () => {
+    it("should call the registered onChange callback with the new value, if there is one", () => {
       const onChangeCallback = jest.fn();
       const newSelectedValue = CriteriaUsageState.MUST_INCLUDE;
       component.registerOnChange(onChangeCallback);
@@ -50,7 +49,7 @@ describe('UsageSelectorComponent', () => {
       expect(onChangeCallback).toHaveBeenCalledWith(newSelectedValue);
     });
 
-    it('should call the registered onTouched callback if there is one', () => {
+    it("should call the registered onTouched callback if there is one", () => {
       const onTouchedCallback = jest.fn();
       const newSelectedValue = CriteriaUsageState.MUST_INCLUDE;
       component.registerOnTouched(onTouchedCallback);
