@@ -6,8 +6,6 @@ import { CriteriaUsageState } from "../criteria-usage-state.enum";
 
 import { TranslatePipe } from "@ngx-translate/core";
 
-import "jest";
-
 jest.mock("@ngx-translate/core");
 
 describe("UsageSelectorComponent", () => {
