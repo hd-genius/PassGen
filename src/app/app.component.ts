@@ -8,7 +8,7 @@ import { CriteriaValidators } from './criteria-validators';
 import { CriteriaUsageState, isUsable } from './criteria-usage-state.enum';
 import { lowerCaseCharacters, upperCaseCharacters, numberCharacters, doesStringContainTypes } from './characters.util';
 import { TranslateService } from '@ngx-translate/core';
-import { find, distinct, take, map, combineOperators, reduce } from 'collection-ops';
+import { find, distinct, take, map, filter, combineOperators, reduce } from 'collection-ops';
 
 @Component({
   selector: 'app-root',
@@ -75,12 +75,10 @@ export class AppComponent {
       upperState === CriteriaUsageState.MUST_INCLUDE,
       numberState === CriteriaUsageState.MUST_INCLUDE,
       specialState === CriteriaUsageState.MUST_INCLUDE,
-      Array.from(specialCharacters)));
+      Array.from(specialCharacters))
+    );
 
-
-    const generatedPassword = firstPasswordThatMeetsCriteria(this.generatePossiblePasswords());
-
-    this.output = generatedPassword;
+    this.output = firstPasswordThatMeetsCriteria(this.generatePossiblePasswords());
   }
 
   public async copyPassword(): Promise<void> {
@@ -103,13 +101,15 @@ export class AppComponent {
   private generatePassword(): string {
     const lengthOfPassword = this.criteriaForm.get('length').value;
     const validCharacters: string[] = this.determineValidCharacters();
+    const filterNumbersThatAreAvailable = filter(number => number < validCharacters.length);
     const takeLengthOfPassword = take(lengthOfPassword);
-    const mapNumberToAnAvailableCharacter = map((randomIndex) => validCharacters[randomIndex % validCharacters.length]);
+    const mapNumberToCharacter = map(number => validCharacters[number]);
     const concatCharacters = reduce((x, y) => x + y)('');
 
     const getPasswordFromNumbers = combineOperators(
+      filterNumbersThatAreAvailable,
       takeLengthOfPassword,
-      mapNumberToAnAvailableCharacter
+      mapNumberToCharacter
     );
 
     return concatCharacters(getPasswordFromNumbers(generateRandomNumbers()));
