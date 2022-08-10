@@ -73,6 +73,8 @@ describe("AppComponent", () => {
     expect(result).toMatch(/^[a-z]*$/);
   });
 
+  it.todo("should include at least 1 lower case letter when lower case letters are required");
+
   it("should use only upper case letters when only upper case is enabled", () => {
     app.criteriaForm.controls.lowerUsage.setValue(CriteriaUsageState.DO_NOT_USE);
     app.criteriaForm.controls.upperUsage.setValue(CriteriaUsageState.CAN_USE);
@@ -80,6 +82,8 @@ describe("AppComponent", () => {
     const result = app.output;
     expect(result).toMatch(/^[A-Z]*$/);
   });
+
+  it.todo("should include at least 1 upper case letter when upper case letters are required");
 
   it("should use only numbers when only numbers are enabled", () => {
     app.criteriaForm.controls.lowerUsage.setValue(CriteriaUsageState.DO_NOT_USE);
@@ -89,6 +93,8 @@ describe("AppComponent", () => {
     expect(result).toMatch(/^[0-9]*$/);
   });
 
+  it.todo("should include at least 1 number when numbers are required");
+
   it("should use only the provided special characters when only the special characters are enabled", () => {
     app.criteriaForm.controls.lowerUsage.setValue(CriteriaUsageState.DO_NOT_USE);
     app.criteriaForm.controls.specialUsage.setValue(CriteriaUsageState.CAN_USE);
@@ -97,4 +103,6 @@ describe("AppComponent", () => {
     const result = app.output;
     expect(result).toMatch(/^[!-_]*$/);
   });
+
+  it.todo("should include at least 1 special character when special characters are required");
 });
