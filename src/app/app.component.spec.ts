@@ -7,15 +7,13 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppComponent } from './app.component';
 
-import "jest";
+import 'jest';
 
 jest.mock('@ionic/angular');
 jest.mock('@ionic-native/splash-screen/ngx');
 jest.mock('@ionic-native/status-bar/ngx');
 
 describe('AppComponent', () => {
-
-  let statusBarSpy, splashScreenSpy, platformReadySpy, platformSpy;
 
   let app: AppComponent;
 
@@ -37,11 +35,13 @@ describe('AppComponent', () => {
   });
 
   it('should initialize the app', async () => {
+    const statusBar = TestBed.get(StatusBar);
+    const splashScreen = TestBed.get(SplashScreen);
+    const platform = TestBed.get(Platform);
     TestBed.createComponent(AppComponent);
-    expect(platformSpy.ready).toHaveBeenCalled();
-    await platformReadySpy;
-    expect(statusBarSpy.styleDefault).toHaveBeenCalled();
-    expect(splashScreenSpy.hide).toHaveBeenCalled();
+    expect(platform.ready).toHaveBeenCalled();
+    expect(statusBar.styleDefault).toHaveBeenCalled();
+    expect(splashScreen.hide).toHaveBeenCalled();
   });
 
   it('should generate a password with the correct length', () => {
