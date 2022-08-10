@@ -43,7 +43,7 @@ describe('UsageSelectorComponent', () => {
     });
 
     it('should call the registered onChange callback with the new value, if there is one', () => {
-      const onChangeCallback = () => {};
+      const onChangeCallback = jest.fn();
       const newSelectedValue = CriteriaUsageState.MUST_INCLUDE;
       component.registerOnChange(onChangeCallback);
       component.updateSelectedValue(newSelectedValue);
@@ -51,7 +51,7 @@ describe('UsageSelectorComponent', () => {
     });
 
     it('should call the registered onTouched callback if there is one', () => {
-      const onTouchedCallback = () => {};
+      const onTouchedCallback = jest.fn();
       const newSelectedValue = CriteriaUsageState.MUST_INCLUDE;
       component.registerOnTouched(onTouchedCallback);
       component.updateSelectedValue(newSelectedValue);
