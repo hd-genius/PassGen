@@ -4,20 +4,25 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { UsageSelectorComponent } from './usage-selector.component';
 import { CriteriaUsageState } from '../criteria-usage-state.enum';
 
+import { TranslatePipe } from '@ngx-translate/core';
+
+import "jest";
+
+jest.mock('@ngx-translate/core');
+
 describe('UsageSelectorComponent', () => {
   let component: UsageSelectorComponent;
-  let fixture: ComponentFixture<UsageSelectorComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ UsageSelectorComponent ],
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [ UsageSelectorComponent, TranslatePipe ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
     .compileComponents();
-  }));
+  });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(UsageSelectorComponent);
+    const fixture = TestBed.createComponent(UsageSelectorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
