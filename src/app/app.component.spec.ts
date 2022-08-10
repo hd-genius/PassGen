@@ -11,6 +11,7 @@ import { AppComponent } from "./app.component";
 
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { UsageSelectorComponent } from "./usage-selector/usage-selector.component";
+import { CriteriaUsageState } from "./criteria-usage-state.enum";
 
 jest.mock("@ionic/angular");
 jest.mock("@ionic-native/splash-screen/ngx");
@@ -64,37 +65,36 @@ describe("AppComponent", () => {
     expect(app.output.length).toEqual(testLength);
   });
 
-  // it("should use lower case letters when lower case is enabled", () => {
-  //   let result: string;
-  //   app.criteriaForm.controls.lowerUsage.setValue(true);
-  //   app.getNewPassword();
-  //   result = app.output;
-  //   expect(result).toMatch(/^[a-z]{5}$/);
-  //   app.criteriaForm.controls.lowerUsage.setValue(false);
-  // });
+  it("should use only lower case letters when only lower case is enabled", () => {
+    let result: string;
+    app.criteriaForm.controls.lowerUsage.setValue(CriteriaUsageState.CAN_USE);
+    app.getNewPassword();
+    result = app.output;
+    expect(result).toMatch(/^[a-z]*$/);
+  });
 
-  // it("should use upper case letters when upper case is enabled", () => {
-  //   app.criteriaForm.controls.lowerUsage.setValue(false);
-  //   app.criteriaForm.controls.upperUsage.setValue(true);
-  //   app.getNewPassword();
-  //   const result = app.output;
-  //   expect(result).toMatch(/^[A-Z]{5}$/);
-  // });
+  it("should use only upper case letters when only upper case is enabled", () => {
+    app.criteriaForm.controls.lowerUsage.setValue(CriteriaUsageState.DO_NOT_USE);
+    app.criteriaForm.controls.upperUsage.setValue(CriteriaUsageState.CAN_USE);
+    app.getNewPassword();
+    const result = app.output;
+    expect(result).toMatch(/^[A-Z]*$/);
+  });
 
-  // it("should use numbers when numbers are enabled", () => {
-  //   app.criteriaForm.controls.lowerUsage.setValue(false);
-  //   app.criteriaForm.controls.numberUsage.setValue(true);
-  //   app.getNewPassword();
-  //   const result = app.output;
-  //   expect(result).toMatch(/^[0-9]{5}$/);
-  // });
+  it("should use only numbers when only numbers are enabled", () => {
+    app.criteriaForm.controls.lowerUsage.setValue(CriteriaUsageState.DO_NOT_USE);
+    app.criteriaForm.controls.numberUsage.setValue(CriteriaUsageState.CAN_USE);
+    app.getNewPassword();
+    const result = app.output;
+    expect(result).toMatch(/^[0-9]*$/);
+  });
 
-  // it("should use the provided special characters when the special toggle is enabled", () => {
-  //   app.criteriaForm.controls.lowerUsage.setValue(false);
-  //   app.criteriaForm.controls.specialUsage.setValue(true);
-  //   app.criteriaForm.controls.specialCharacters.setValue("!-_");
-  //   app.getNewPassword();
-  //   const result = app.output;
-  //   expect(result).toMatch(/^[!-_]{5}$/);
-  // });
+  it("should use only the provided special characters when only the special characters are enabled", () => {
+    app.criteriaForm.controls.lowerUsage.setValue(CriteriaUsageState.DO_NOT_USE);
+    app.criteriaForm.controls.specialUsage.setValue(CriteriaUsageState.CAN_USE);
+    app.criteriaForm.controls.specialCharacters.setValue("!-_");
+    app.getNewPassword();
+    const result = app.output;
+    expect(result).toMatch(/^[!-_]*$/);
+  });
 });
