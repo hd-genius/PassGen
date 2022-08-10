@@ -10,6 +10,7 @@ import { lowerCaseCharacters, upperCaseCharacters, numberCharacters, doesStringC
 import { TranslateService } from '@ngx-translate/core';
 import { find, distinct, take, map, filter, combineOperators, reduce } from 'collection-ops';
 
+
 @Component({
   selector: 'app-root',
   styleUrls: ['app.component.scss'],
@@ -42,9 +43,8 @@ export class AppComponent {
     private toastController: ToastController,
     private translate: TranslateService
   ) {
-    translate.setDefaultLang('en');
-    translate.use(translate.getBrowserLang());
     this.initializeApp();
+
     this.criteriaForm.get('specialUsage').valueChanges.subscribe(state => {
       const specialCharactersControl = this.criteriaForm.get('specialCharacters');
       if (isUsable(state)) {
@@ -56,6 +56,9 @@ export class AppComponent {
   }
 
   private initializeApp(): void {
+    this.translate.setDefaultLang('en');
+    this.translate.use(this.translate.getBrowserLang());
+
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
