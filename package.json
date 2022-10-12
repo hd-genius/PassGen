@@ -48,7 +48,7 @@
     "@ngx-translate/http-loader": "^4.0.0",
     "ajv": "^6.10.2",
     "collection-ops": "^0.4.0",
-    "cordova-android": "7.1.4",
+    "cordova-android": "11.0.0",
     "cordova-clipboard": "1.2.1",
     "cordova-plugin-device": "^2.0.3",
     "cordova-plugin-ionic": "^5.4.6",
